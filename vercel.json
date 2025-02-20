@@ -14,5 +14,6 @@
   ],
   "env": {
     "MONGODB_URI": "@MONGODB_URI"
+    "SESSION_SECRET": "@session_secret"
   }
 }
