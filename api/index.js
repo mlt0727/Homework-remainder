@@ -1,3 +1,4 @@
+// api/index.js
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
@@ -10,15 +11,15 @@ const MongoStore = require('connect-mongo');
 const flash = require('express-flash');
 
 // 引入用户模型
-const User = require('./models/user');
+const User = require('./models/user.js');
 
 // 从环境变量获取MongoDB连接URL，如果没有则使用本地连接
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/homework-manager';
 
 // 连接 MongoDB
-mongoose.connect(MONGODB_URI, {    
-  useNewUrlParser: true, 
-  useUnifiedTopology: true 
+mongoose.connect(MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 // 监听MongoDB连接事件
@@ -81,21 +82,7 @@ app.use(function(err, req, res, next) {
   res.status(500).send('Something broke!');
 });
 
-// 启动服务器
-const port = process.env.PORT || 3000;
+// ---- 这里移除 app.listen() 部分 ----
 
-// 添加端口检查和错误处理
-const server = app.listen(port, '0.0.0.0', () => {
-  console.log(`服务器启动成功，访问地址：http://localhost:${port}`);
-}).on('error', (err) => {
-  if (err.code === 'EADDRINUSE') {
-    console.error(`端口 ${port} 已被占用，请尝试使用其他端口或关闭占用端口的程序。`);
-    process.exit(1);
-  } else {
-    console.error('服务器启动失败:', err);
-    process.exit(1);
-  }
-});
-
+// 只导出 app，让 Vercel 或其他无服务器平台来接管端口监听
 module.exports = app;
-
