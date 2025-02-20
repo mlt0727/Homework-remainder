@@ -10,7 +10,7 @@ const MongoStore = require('connect-mongo');
 const flash = require('express-flash');
 
 // 引入用户模型
-const User = require('./models/user');
+const User = require('./models/user.js');
 
 // 从环境变量获取MongoDB连接URL，如果没有则使用本地连接
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/homework-manager';
