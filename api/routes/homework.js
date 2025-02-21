@@ -48,7 +48,7 @@ router.post('/:id/edit', isAuthenticated, async (req, res) => {
     }
 
     // 调整日期时区
-    const adjustedDate = dueDate ? new Date(new Date(dueDate).getTime() + 24 * 60 * 60 * 1000) : null;
+    const adjustedDate = dueDate ? new Date(new Date(dueDate).getTime()) : null;
 
     homework.title = title;
     homework.description = description;
