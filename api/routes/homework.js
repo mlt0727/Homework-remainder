@@ -81,7 +81,7 @@ router.post('/', isAuthenticated, async (req, res) => {
   try {
     const { title, description, dueDate } = req.body;
     // 调整日期时区
-    const adjustedDate = dueDate ? new Date(new Date(dueDate).getTime() + 24 * 60 * 60 * 1000) : null;
+    const adjustedDate = dueDate ? new Date(new Date(dueDate).getTime()) : null;
 
     const homework = new Homework({
       title,
